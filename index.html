@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video with Question</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Informative video with a question at the end</h1>
+    <div class="video-container">
+        <video id="myVideo" controls width="640" height="360">
+            <source src="C:\Users\victo\Videos\African Lion.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+     <!-- Congradulations-->
+     <div class="modal" id="congratsModal" style="display: none;">
+        <div class="modal-content">
+            <div class="text-right cross" onclick="closeCongratsModal()"><i class="fa fa-times"></i></div>
+            <div class="modal-body text-center">
+                <img src="https://img.icons8.com/bubbles/200/000000/trophy.png">
+                <h4>CONGRATULATIONS!</h4>
+                <p>You have chosen the correct answer! Good job!</p>
+                <button class="btn continue" onclick="closeCongratsModal()">CONTINUE</button>
+            </div>
+        </div>
+    </div> 
+
+
+
+    
+    <!-- DIV with questions and answers -->
+    <div class="modal-dialog" id="questionModal" style="display: none;">
+        <h2>Where do lions live the most?</h2>
+        <p>Сhoose the most correct answer</p>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="answer1" value="answer1">
+                <label for="answer1">Africa</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="answer2" value="answer2">
+                <label for="answer2">Australia</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="answer3" value="answer3">
+                <label for="answer3">India</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="answer4" value="answer4">
+                <label for="answer4">America</label>
+            </li>
+        </ul>
+        <button onclick="checkAnswer()">Check</button>
+    </div>
+
+    <script>
+    
+        const videoElement = document.getElementById('myVideo');
+        const questionModal = document.getElementById('questionModal');
+
+        videoElement.addEventListener('ended', function() {
+            questionModal.style.display = 'block';
+        });
+
+        function openCongratsModal() {
+            document.getElementById('congratsModal').style.display = 'block';
+        }
+
+        function closeCongratsModal() {
+            document.getElementById('congratsModal').style.display = 'none';
+        }
+       
+        function checkAnswer() {
+            
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+            if (selectedAnswer) {
+                
+                if (selectedAnswer.value === "answer1") {
+                    openCongratsModal();
+                } else {
+                    alert('You have chosen the wrong answer. Watch the video again.');
+                }
+                
+                questionModal.style.display = 'none';
+            } else {
+                alert('Please select an answer.');
+            }
+        }
+        
+    </script>
+</body>
+</html>
